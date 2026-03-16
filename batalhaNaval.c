@@ -36,64 +36,159 @@
     // 0 0 1 0 0
 
 int main() {
-    //criação das variáveis
+    // TABULEIRO
     int tabuleiro[10][10] = {0};
-    int navio1[3] = {3, 3, 3};
-    int navio2[3] = {3, 3, 3};
-    int navio3[3] = {3, 3, 3};
-    int navio4[3] = {3, 3, 3};
-    char letras[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
 
-    //exibição das letras
+    // MATRIZES DAS HABILIDADES
+    int cone[5][5];
+    int cruz[5][5];
+    int octaedro[5][5];
+
+    // LETRAS DO TABULEIRO
+    char letras[10] = {'A','B','C','D','E','F','G','H','I','J'};
+
+    // MOSTRAR LETRAS
     printf("   ");
-    for (int i = 0; i < 10; i++)
-    {
+    for(int i = 0; i < 10; i++){
         printf("%c ", letras[i]);
     }
     printf("\n");
 
-    //adicionando os navios
-    //horizontal
-    for (int i = 0; i < 3; i++)
-    {
-        tabuleiro[2][5 + i] = navio1[i]; //horizontal 
-    };
+    // ----------------------
+    // CONSTRUIR CONE
+    // ----------------------
 
-    //vertical
-    for (int i = 0; i < 3; i++)
-    {
-        tabuleiro[7 + i][2] = navio2[i]; 
-    };
+    for(int i = 0; i < 5; i++){
+        for(int j = 0; j < 5; j++){
 
-    //diagonal1
-    for (int i = 0; i < 3; i++)
-    {
-        tabuleiro[i][i] = navio3[i];
-    }
+            if((i == 0 && j == 2) ||
+               (i == 1 && j >= 1 && j <= 3) ||
+               (i == 2))
+                cone[i][j] = 1;
+            else
+                cone[i][j] = 0;
 
-    //diagonal2
-    for (int i = 0; i < 3; i++)
-    {
-        for (int j = 9; j > 6; j--)
-        {
-            tabuleiro[j][j] = navio4[i];
         }
-        
     }
-    
 
-    //exibição da matriz
-    for (int i = 0; i < 10; i++)
-    {
+    // ----------------------
+    // CONSTRUIR CRUZ
+    // ----------------------
+
+    for(int i = 0; i < 5; i++){
+        for(int j = 0; j < 5; j++){
+
+            if(i == 2 || j == 2)
+                cruz[i][j] = 1;
+            else
+                cruz[i][j] = 0;
+
+        }
+    }
+
+    // ----------------------
+    // CONSTRUIR OCTAEDRO
+    // ----------------------
+
+    for(int i = 0; i < 5; i++){
+        for(int j = 0; j < 5; j++){
+
+            if((i == 0 && j == 2) ||
+               (i == 1 && j >= 1 && j <= 3) ||
+               (i == 2) ||
+               (i == 3 && j >= 1 && j <= 3) ||
+               (i == 4 && j == 2))
+                octaedro[i][j] = 1;
+            else
+                octaedro[i][j] = 0;
+
+        }
+    }
+
+    // ----------------------
+    // APLICAR CONE
+    // ----------------------
+
+    int linhaCone = 2;
+    int colunaCone = 2;
+
+    for(int i = 0; i < 5; i++){
+        for(int j = 0; j < 5; j++){
+
+            int linha = linhaCone + i - 2;
+            int coluna = colunaCone + j - 2;
+
+            if(linha >= 0 && linha < 10 && coluna >= 0 && coluna < 10){
+                if(cone[i][j] == 1)
+                    tabuleiro[linha][coluna] = 5;
+            }
+
+        }
+    }
+
+    // ----------------------
+    // APLICAR CRUZ
+    // ----------------------
+
+    int linhaCruz = 5;
+    int colunaCruz = 5;
+
+    for(int i = 0; i < 5; i++){
+        for(int j = 0; j < 5; j++){
+
+            int linha = linhaCruz + i - 2;
+            int coluna = colunaCruz + j - 2;
+
+            if(linha >= 0 && linha < 10 && coluna >= 0 && coluna < 10){
+                if(cruz[i][j] == 1)
+                    tabuleiro[linha][coluna] = 5;
+            }
+
+        }
+    }
+
+    // ----------------------
+    // APLICAR OCTAEDRO
+    // ----------------------
+
+    int linhaOct = 7;
+    int colunaOct = 2;
+
+    for(int i = 0; i < 5; i++){
+        for(int j = 0; j < 5; j++){
+
+            int linha = linhaOct + i - 2;
+            int coluna = colunaOct + j - 2;
+
+            if(linha >= 0 && linha < 10 && coluna >= 0 && coluna < 10){
+                if(octaedro[i][j] == 1)
+                    tabuleiro[linha][coluna] = 5;
+            }
+
+        }
+    }
+
+    // ----------------------
+    // MOSTRAR TABULEIRO
+    // ----------------------
+
+    for(int i = 0; i < 10; i++){
+
         printf("%d  ", i + 1);
-        for (int j = 0; j < 10; j++)
-          {
-            printf("%d ", tabuleiro[i][j]);
-            
-          };
+
+        for(int j = 0; j < 10; j++){
+
+            if(tabuleiro[i][j] == 0)
+                printf("0 ");
+            else if(tabuleiro[i][j] == 3)
+                printf("3 ");
+            else if(tabuleiro[i][j] == 5)
+                printf("1 ");
+
+        }
+
         printf("\n");
-        
-    };
+    }
     
     return 0;
 }
