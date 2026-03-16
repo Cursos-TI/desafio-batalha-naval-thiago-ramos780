@@ -38,8 +38,10 @@
 int main() {
     //criação das variáveis
     int tabuleiro[10][10] = {0};
-    int navio1[3] = {3,3,3};
-    int navio2[3] = {3,3,3};
+    int navio1[3] = {3, 3, 3};
+    int navio2[3] = {3, 3, 3};
+    int navio3[3] = {3, 3, 3};
+    int navio4[3] = {3, 3, 3};
     char letras[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
 
     //exibição das letras
@@ -62,6 +64,23 @@ int main() {
     {
         tabuleiro[7 + i][2] = navio2[i]; 
     };
+
+    //diagonal1
+    for (int i = 0; i < 3; i++)
+    {
+        tabuleiro[i][i] = navio3[i];
+    }
+
+    //diagonal2
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 9; j > 6; j--)
+        {
+            tabuleiro[j][j] = navio4[i];
+        }
+        
+    }
+    
 
     //exibição da matriz
     for (int i = 0; i < 10; i++)
