@@ -4,8 +4,7 @@
 // Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
 // Siga os comentários para implementar cada parte do desafio.
 
-int main() {
-    // Nível Novato - Posicionamento dos Navios
+// Nível Novato - Posicionamento dos Navios
     // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
     // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
     // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
@@ -36,5 +35,46 @@ int main() {
     // 1 1 1 1 1
     // 0 0 1 0 0
 
+int main() {
+    //criação das variáveis
+    int tabuleiro[10][10] = {0};
+    int navio1[3] = {3,3,3};
+    int navio2[3] = {3,3,3};
+    char letras[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+
+    //exibição das letras
+    printf("   ");
+    for (int i = 0; i < 10; i++)
+    {
+        printf("%c ", letras[i]);
+    }
+    printf("\n");
+
+    //adicionando os navios
+    //horizontal
+    for (int i = 0; i < 3; i++)
+    {
+        tabuleiro[2][5 + i] = navio1[i]; //horizontal 
+    };
+
+    //vertical
+    for (int i = 0; i < 3; i++)
+    {
+        tabuleiro[7 + i][2] = navio2[i]; 
+    };
+
+    //exibição da matriz
+    for (int i = 0; i < 10; i++)
+    {
+        printf("%d  ", i + 1);
+        for (int j = 0; j < 10; j++)
+          {
+            printf("%d ", tabuleiro[i][j]);
+            
+          };
+        printf("\n");
+        
+    };
+    
     return 0;
 }
